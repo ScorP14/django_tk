@@ -3,7 +3,6 @@ from django.core.validators import validate_slug
 from django.utils.text import slugify
 
 
-
 class Substation(models.Model):
     view = models.CharField('Тип', max_length=250)
     number = models.CharField('Номер', max_length=50)
@@ -14,12 +13,10 @@ class Substation(models.Model):
     def __str__(self):
         return f'{self.view}-{self.number}, {self.city}'
 
-
     class Meta:
             ordering = ['city', 'view', 'number']
             verbose_name = 'Подстанция'
             verbose_name_plural = 'Подстанции'
-
 
 
 class Photo(models.Model):

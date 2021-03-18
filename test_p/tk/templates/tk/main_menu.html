@@ -2,60 +2,60 @@
 {% block content %}
 
 <div class="container" style="margin-top:30px">
-  <div class="row">
-    <div class="col-sm-8">
-      <h2>Последние снимки:</h2>
-      {% for photo in photos %}
-      <div class="card mb-3">
-        <div class="card-header">
-          <a href="#">
-            <h5>{{photo.date|date:"d.m.Y" }}: {{photo.photo}}</h5>
-          </a>
-          <h5>{{photo.tp}}</h5>
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>Последние снимки:</h2>
+            {% for photo in photos %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <a href="#">
+                        <h5>{{photo.date|date:"d.m.Y" }}: {{photo.number_photo}}</h5>
+                    </a>
+                    <h5>{{photo.substation}}</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-text">{{photo.view_ru}}: {{photo.cell}} - {{photo.number_cell}}
+                        <br>
+                        Температура:
+                        Воздуха - {{photo.t0}},
+                        ф.А - {{photo.ta}},
+                        ф.B - {{photo.tb}},
+                        ф.С - {{photo.tc}} </h6>
+                </div>
+                <div class="card-footer">
+                    {% if photo.temp_result == "Дефектов нет" %}
+                    <h5 class="card-subtitle mb-2 text-success">{{photo.temp_result}}</h5>
+                    {% elif photo.temp_result == "Начальный дефект" or photo.temp_result == "Развившийся дефект" %}
+                    <h5 class="card-subtitle mb-2 text-warning">{{photo.temp_result}}: {{photo.temp_str}}</h5>
+                    {% elif photo.temp_result == "Аварийный дефект" %}
+                    <h5 class="card-subtitle mb-2 text-danger">{{photo.temp_result}}: {{photo.temp_str}}</h5>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        <div class="card-body">
-          <h6 class="card-text">{{photo.view_ru}}: {{photo.cell}} - {{photo.number_cell}}
-            <br>
-            Температура:
-            Воздуха - {{photo.t0}},
-            ф.А - {{photo.ta}},
-            ф.B - {{photo.tb}},
-            ф.С - {{photo.tc}} </h6>
+        <div class="col-sm-4">
+            <h2>About Me</h2>
+            <h5>Photo of me:</h5>
+            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+            <h3>Some Links</h3>
+            <p>Lorem ipsum dolor sit ame.</p>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <hr class="d-sm-none">
         </div>
-        <div class="card-footer">
-          {% if photo.temp_result == "Дефектов нет" %}
-          <h5 class="card-subtitle mb-2 text-success">{{photo.temp_result}}</h5>
-          {% elif photo.temp_result == "Начальный дефект" or photo.temp_result == "Развившийся дефект" %}
-          <h5 class="card-subtitle mb-2 text-warning">{{photo.temp_result}}: {{photo.temp_str}}</h5>
-          {% elif photo.temp_result == "Аварийный дефект" %}
-          <h5 class="card-subtitle mb-2 text-danger">{{photo.temp_result}}: {{photo.temp_str}}</h5>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
     </div>
-    <div class="col-sm-4">
-      <h2>About Me</h2>
-      <h5>Photo of me:</h5>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-      <h3>Some Links</h3>
-      <p>Lorem ipsum dolor sit ame.</p>
-      <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-      <hr class="d-sm-none">
-    </div>
-  </div>
 </div>
 {% endblock %}
