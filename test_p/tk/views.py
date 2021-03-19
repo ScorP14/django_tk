@@ -9,7 +9,6 @@ from .models import *
 
 def main_menu(request):
     photos = Photo.objects.all()
-    print(photos)
     return render(request, 'tk/main_menu.html', {'photos': photos})
 
 

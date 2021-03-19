@@ -1,46 +1,49 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Главная{% endblock %} - ЭТЛ-ТК</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
-
 <body>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/#">
-        <img src="" alt="Logo" style="width:30px;">
+    <a class="navbar-brand text-center" href="/#">
+        <img src="static/img/icon_tr.png" alt="Logo" style="width:30px;">
     </a>
-    <a class="navbar-brand" href="/#">Navbar</a>
-    <div class="collapse navbar-collapse">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-            <li class="nav-item active">
+            <li class="nav-item active mx-auto">
                 <a class="nav-link" href="">Главная</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mx-auto">
                 <a class="nav-link" href="fl">Фото</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mx-auto">
                 <a class="nav-link" href="">ТП</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mx-auto">
                 <a class="nav-link" href="#">Excel</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mx-auto">
                 <a class="nav-link" href="/admin/">admin</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mx-auto ">
                 <a class="nav-link" href="">Создать отчет</a>
             </li>
         </ul>
         <a class="navbar-brand" href="#">
-            <img src="" alt="Logo" style="width:30px;">
+            <img src="static/img/icon_tr.png" alt="logo" style="width:30px;">
         </a>
     </div>
 </nav>
@@ -50,14 +53,39 @@
     <p>Фотографии, номера трансформаторных подстанций их расположение и многое другое...</p>
 </div>
 
-{% block content %}
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="col-sm-4">
+            <h2>About Me</h2>
+            <h5>Photo of me:</h5>
+            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+            <h3>Some Links</h3>
+            <p>Lorem ipsum dolor sit ame.</p>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item mx-auto">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <hr class="d-sm-none">
+        </div>
+    </div>
+</div>
 
-
-{% endblock %}
-
-<footer class="jumbotron text-center" style="margin:0">
+<footer class="footer navbar-fixed-bottom text-center jumbotron " style="margin:0">
     <p>Footer</p>
 </footer>
 </body>
-
 </html>
