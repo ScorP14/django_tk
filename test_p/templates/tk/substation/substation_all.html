@@ -1,0 +1,35 @@
+{% extends "tk/basic.html" %}
+{% block title %} Подстанции {% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm ">
+        <h2 style="display: inline-block;">Количесвто подстанций - {{ substation.count }}</h2>
+    </div>
+    <div class="col-sm">
+        <a href="">
+            <button type="button" class="btn btn-success"
+                    style="display: inline-block;">
+                Добавить подстанцию
+            </button>
+        </a>
+    </div>
+</div>
+
+<div class="card-columns row">
+    {% for tp in substation %}
+    <div class="card bg-light shadow-sm col-5 text-center mx-auto">
+        <div class="card-body text-left"><a href="{{ tp.get_absolute_url }}">{{ tp }}</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<ul class="pagination">
+    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>
+
+{% endblock %}
