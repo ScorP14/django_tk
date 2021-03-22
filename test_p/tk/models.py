@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import validate_slug
+from django.urls import reverse
 from django.utils.text import slugify
 
 
@@ -12,6 +13,14 @@ class Substation(models.Model):
 
     def __str__(self):
         return f'{self.view}-{self.number}, {self.city}'
+
+    def get_absolute_url(self):
+        return reverse('tk:substation_url', args=(self.slug,))
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f'{self.city}-{self.view}-{self.number}')
+        # self.slug = slugify(f'/', allow_unicode=True)
+        super().save(*args, **kwargs)
 
     class Meta:
             ordering = ['city', 'view', 'number']
@@ -44,14 +53,10 @@ class Photo(models.Model):
     def save(self, *args, **kwargs):
         y, m, d = self.date.year, self.date.month, self.date.day
         view_tp, num_tp = self.substation.view, self.substation.number
-        print(y, m, d)
         self.slug = f'{y}/{m}/{d}/{view_tp}-{num_tp}/{self.number_photo}'
       # self.slug = slugify(f'/', allow_unicode=True)
         super().save(*args, **kwargs)
 
-
-    def last_three_photos(self):
-        pass
 
 
 
