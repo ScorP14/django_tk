@@ -1,10 +1,10 @@
 {% extends "tk/basic.html" %}
-{% block title %} {{ substation.view }} - {{ substation.number }}{% endblock %}
+{% block title %} {{ substation.view|upper }}-{{ substation.number|upper }}, {{substation.city|title}} {% endblock %}
 {% block content %}
 <div class="container">
     <div class="card bg-light shadow-sm ">
         <div class="card-body text-left">
-            <h2 class="card-title"> {{ substation.city }}: {{substation.view}} - {{ substation.number }}</h2>
+            <h2 class="card-title"> {{ substation.city|title }}: {{substation.view|upper}} - {{ substation.number|upper }}</h2>
             <p class="card-text">Расположение подстанции: Не известно</p>
             <p class="card-text">Количество снимков: {{tp.count_photo}} <br>
                 Из них:<br>

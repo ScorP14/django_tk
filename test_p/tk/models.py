@@ -9,16 +9,17 @@ class Substation(models.Model):
     number = models.CharField('Номер', max_length=50)
     city = models.CharField('Город', max_length=100)
     location = models.CharField('Расположение', max_length=250)
-    slug = models.SlugField(max_length=250, validators=[validate_slug], unique=True)
 
     def __str__(self):
-        return f'{self.view}-{self.number}, {self.city}'
+        return f'{self.city.title()}, {self.view.upper()}-{self.number}'
 
     def get_absolute_url(self):
-        return reverse('tk:substation_url',kwargs={'city':self.city,'tp':f'{self.view}-{self.number}'})
+        return reverse('tk:substation_url', kwargs={'city': self.city, 'view': self.view, 'number': self.number})
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f'{self.view}-{self.number}', allow_unicode=True)
+        self.view = slugify(self.view.lower(), allow_unicode=True)
+        self.number = slugify(self.number.lower(), allow_unicode=True)
+        self.city = slugify(self.city.lower(), allow_unicode=True)
         super().save(*args, **kwargs)
 
     class Meta:
@@ -45,7 +46,6 @@ class Photo(models.Model):
     comment = models.TextField('Комментарий', blank=True)
     substation = models.ForeignKey(Substation, on_delete=models.PROTECT)
 
-
     def __str__(self):
         return f'{self.date}: {self.number_photo}'
 
@@ -53,12 +53,7 @@ class Photo(models.Model):
         y, m, d = self.date.year, self.date.month, self.date.day
         view_tp, num_tp = self.substation.view, self.substation.number
         self.slug = f'{y}/{m}/{d}/{view_tp}-{num_tp}/{self.number_photo}'
-      # self.slug = slugify(f'/', allow_unicode=True)
         super().save(*args, **kwargs)
-
-
-
-
 
     class Meta:
         ordering = ['-date', 'number_photo']

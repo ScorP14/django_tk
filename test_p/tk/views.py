@@ -11,41 +11,29 @@ def main_menu(request):
 
 
 def test(request, *args, **kwargs):
-    print(request)
-    print(args, kwargs)
+    print(request, args, kwargs, sep='/n')
     return HttpResponse('Test')
-
 
 
 class SubstationViewAll(ListView):
     model = Substation
     template = 'tk/substation/substation_all.html'
-  
-
-
 
     def get(self, request):
-
-        from unidecode import unidecode
-        from django.template import defaultfilters
-        slug = defaultfilters.slugify(unidecode('Паша плюшкин'))
-
-        print(slug)
         obj = self.model.objects.all()
         return render(request, self.template, {self.model.__name__.lower(): obj})
 
 
-
-def SubstationView(request, **kwargs):
-    print(request)
-    print(kwargs)
-    return render(request, 'tk/substation/substation.html', {})
+def substation_view(request, **kwargs):
+    substation = Substation.objects.all().filter(city=kwargs['city'], view=kwargs['view'], number=kwargs['number'])[0]
+    return render(request, 'tk/substation/substation.html', {'substation': substation})
 
 
-
-
-
-#class SubstationView(DetailView):
-#    model = Substation
-  #  template_name = 'tk/substation/substation.html'
-#    context_object_name = 'substation'
+def filter_substation(request, **kwargs: str):
+    if 'view' in kwargs:
+        substation = Substation.objects.all().filter(city=kwargs['city'].lower(), view=kwargs['view'].lower())
+    elif 'city' in kwargs:
+        substation = Substation.objects.all().filter(city=kwargs['city'].lower())
+    else:
+        substation = Substation.objects.all()
+    return render(request, 'tk/substation/substation_all.html', {'substation': substation})
