@@ -15,11 +15,10 @@ class Substation(models.Model):
         return f'{self.view}-{self.number}, {self.city}'
 
     def get_absolute_url(self):
-        return reverse('tk:substation_url', args=(self.slug,))
+        return reverse('tk:substation_url',kwargs={'city':self.city,'tp':f'{self.view}-{self.number}'})
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(f'{self.city}-{self.view}-{self.number}')
-        # self.slug = slugify(f'/', allow_unicode=True)
+        self.slug = slugify(f'{self.view}-{self.number}', allow_unicode=True)
         super().save(*args, **kwargs)
 
     class Meta:

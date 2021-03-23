@@ -2,5 +2,12 @@ from django.contrib import admin
 from .models import Substation, Photo
 # Register your models here.
 
-admin.site.register(Substation)
+
+
+class SubAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('view', 'number')}
+
+
+
+admin.site.register(Substation, SubAdmin)
 admin.site.register(Photo)
