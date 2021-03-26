@@ -11,9 +11,11 @@ def main_menu(request):
 
 
 def test(request, *args, **kwargs):
-    return HttpResponse(f'{request.path}---{args}---{kwargs}')
+    s = '__'.join([f'{k}-{v}' for k, v in kwargs.items()])
+    return HttpResponse(f'''{request.path}      ------{s}''')
 
 
+# ---------Substation-------------------------------------------------------------------
 class SubstationViewAll(ListView):
     model = Substation
     template = 'tk/substation/substation_all.html'
@@ -29,10 +31,36 @@ def substation_view(request, **kwargs):
 
 
 def filter_substation(request, **kwargs: str):
-    if 'view' in kwargs:
-        substation = Substation.objects.all().filter(city=kwargs['city'].lower(), view=kwargs['view'].lower())
-    elif 'city' in kwargs:
-        substation = Substation.objects.all().filter(city=kwargs['city'].lower())
+    substation = Substation.filter_substation_for_city_view(kwargs)
+    if not substation:
+        return redirect('tk:substation_all_url')
+    return render(request, 'tk/substation/substation_all.html', {'substation': substation})
+
+# --------------------------------------------------------------------------------------
+
+
+# ---------------------------------Photo------------------------------------------------
+class PhotoViewAll(ListView):
+    model = Photo
+    template = 'tk\photo\photo_all.html'
+
+    def get(self, request):
+        obj = self.model.objects.all()
+        return render(request, self.template, {self.model.__name__.lower(): obj})
+
+
+def filter_photo(request, **kwargs: str):
+    if 'year' in kwargs:
+        substation = Photo.objects.all().filter(city=kwargs['city'].lower(), view=kwargs['view'].lower())
+    elif 'month' in kwargs:
+        substation = Photo.objects.all().filter(city=kwargs['city'].lower())
+    elif 'day' in kwargs:
+        substation = Photo.objects.all().filter(city=kwargs['city'].lower())
     else:
         return redirect('tk:substation_all_url')
     return render(request, 'tk/substation/substation_all.html', {'substation': substation})
+
+
+def photo_view(request, **kwargs):
+    substation = Photo.objects.all().filter(city=kwargs['city'], view=kwargs['view'], number=kwargs['number'])[0]
+    return render(request, 'tk/substation/substation.html', {'substation': substation})

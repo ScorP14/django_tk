@@ -1,8 +1,7 @@
 from django.shortcuts import redirect
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 from .views import SubstationViewAll, test, substation_view, main_menu, filter_substation
-
 
 url_substation = ([
     path('', lambda request: redirect('tk:substation_all_url')),
@@ -22,10 +21,20 @@ url_substation = ([
 ])
 
 url_photo = ([
-
     path('', lambda request: redirect('tk:photo_all_url')),
     path('all/', test, name='photo_all_url'),
     path('create/', test, name='photo_create_url'),
+
+
+
+    # Через регулярки
+    # re_path(r'^(?P<year>[0-9]{4})/$', test, name='photo_filter_year_url'),
+    # re_path(r'^(?P<year>[0-9]{4})/(?P<month>((0[1-9]|[1-9])|1[012]))/$', test, name='photo_filter_year_month_url'),
+    # re_path(r'^(?P<year>[0-9]{4})/(?P<month>((0[1-9]|[1-9])|1[012]))/'
+    #         r'(?P<day>((0[1-9]|[1-9])|1[012]))/$',test, name='photo_filter_year_month_day_url'),
+
+
+
     path('<int:year>/', test, name='photo_filter_year_url'),
     path('<int:year>/<int:month>/', test, name='photo_filter_year_month_url'),
     path('<int:year>/<int:month>/<int:day>/', test, name='photo_filter_year_month_day_url'),
@@ -41,5 +50,3 @@ urlpatterns = [
     path('substation/', include(url_substation)),
     path('photo/', include(url_photo)),
 ]
-
-

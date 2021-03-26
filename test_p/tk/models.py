@@ -10,8 +10,19 @@ class Substation(models.Model):
     city = models.CharField('Город', max_length=100)
     location = models.CharField('Расположение', max_length=250)
 
-    def __str__(self):
-        return f'{self.city.title()}, {self.view.upper()}-{self.number}'
+    def get_substation(self, **kwargs):
+        tp = Substation.objects.filter(city=kwargs['city'], view=kwargs['view'], number=kwargs['number'])[0]
+
+
+        # return render(request, 'tk/substation/substation.html', {'substation': substation})
+        pass
+
+    @staticmethod
+    def filter_substation_for_city_view(**kwargs: str):
+        search = Substation.objects.filter(city=kwargs['city'].lower())
+        if 'view' in kwargs:
+            search = search.filter(view=kwargs['view'].lower())
+        return search
 
     def get_absolute_url(self):
         return reverse('tk:substation_url', kwargs={'city': self.city, 'view': self.view, 'number': self.number})
@@ -21,6 +32,9 @@ class Substation(models.Model):
         self.number = slugify(self.number.lower(), allow_unicode=True)
         self.city = slugify(self.city.lower(), allow_unicode=True)
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.city.title()}, {self.view.upper()}-{self.number}'
 
     class Meta:
             ordering = ['city', 'view', 'number']
@@ -51,8 +65,8 @@ class Photo(models.Model):
 
     def save(self, *args, **kwargs):
         y, m, d = self.date.year, self.date.month, self.date.day
-        view_tp, num_tp = self.substation.view, self.substation.number
-        self.slug = f'{y}/{m}/{d}/{view_tp}-{num_tp}/{self.number_photo}'
+        self.slug = f'{self.number_photo}-{y}-{m}-{d}'
+        print(self.slug)
         super().save(*args, **kwargs)
 
     class Meta:
