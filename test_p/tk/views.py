@@ -11,8 +11,7 @@ def main_menu(request):
 
 
 def test(request, *args, **kwargs):
-    print(request, args, kwargs, sep='/n')
-    return HttpResponse('Test')
+    return HttpResponse(f'{request.path}---{args}---{kwargs}')
 
 
 class SubstationViewAll(ListView):
@@ -35,5 +34,5 @@ def filter_substation(request, **kwargs: str):
     elif 'city' in kwargs:
         substation = Substation.objects.all().filter(city=kwargs['city'].lower())
     else:
-        substation = Substation.objects.all()
+        return redirect('tk:substation_all_url')
     return render(request, 'tk/substation/substation_all.html', {'substation': substation})
