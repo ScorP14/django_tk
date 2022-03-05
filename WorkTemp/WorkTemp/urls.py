@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.shortcuts import render
 
 urlpatterns = [
-    path('', lambda r:render(r, 'basic.html')),
+    path('', lambda r:render(r, 'main_menu.html')),
     path('substation/', include('substation.urls')),
     path('photo/', include('photo.urls')),
     path('admin/', admin.site.urls)

@@ -1,0 +1,54 @@
+{% extends "basic.html" %}
+{% block content %}
+{% for tp in substation %}
+<div class="col-md-4">
+    <h2>{{tp.city}}</h2>
+    <p>{{tp.city}}-
+    {{tp.number}}</p>
+    <p><a class="btn btn-secondary" href="#" role="button">Читать далее »</a></p>
+</div>
+{% endfor %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>№ чека</th>
+            <th>Способ платежа</th>
+            <th>Дата платежа</th>
+            <th>Сумма</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="active">
+            <td>2803</td>
+            <td>Наличные</td>
+            <td>04.08.2014</td>
+            <td>2005.00</td>
+        </tr>
+        <tr class="success">
+            <td>2804</td>
+            <td>Карта VISA</td>
+            <td>04.08.2014</td>
+            <td>1270.00</td>
+        </tr>
+        <tr class="info">
+            <td>2805</td>
+            <td>Наличные</td>
+            <td>05.08.2014</td>
+            <td>1356.50</td>
+        </tr>
+        <tr class="warning">
+            <td>2806</td>
+            <td>Наличные</td>
+            <td>05.08.2014</td>
+            <td>5200.05</td>
+        </tr>
+        <tr class="danger">
+            <td>2807</td>
+            <td>Карта VISA</td>
+            <td>06.08.2014</td>
+            <td>315.70</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

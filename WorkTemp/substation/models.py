@@ -4,12 +4,20 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 
+from transliterate import translit     
+
+
+
+
+
 class City(models.Model):
-    name = models.CharField('Город', max_length=250, primary_key=True, unique=True)
+    name = models.CharField('Название', max_length=250, primary_key=True, unique=True)
+    name_transle = models.CharField('Название на транслите', max_length=250, null=True, default='')
     objects = models.Manager()
 
     def save(self, *args, **kwargs):
         self.name = slugify(self.name, allow_unicode=True)
+        self.name_transle = translit(self.name, language_code='ru', reversed=True) 
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -17,11 +25,13 @@ class City(models.Model):
 
 
 class View(models.Model):
-    name = models.CharField('Тип подстанции', max_length=250, primary_key=True, unique=True)
+    name = models.CharField('Название', max_length=250, primary_key=True, unique=True)
+    name_transle = models.CharField('Название на транслите', max_length=250, null=True, default='')
     objects = models.Manager()
 
     def save(self, *args, **kwargs):
         self.name = slugify(self.name, allow_unicode=True)
+        self.name_transle = translit(self.name, language_code='ru', reversed=True) 
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -46,9 +56,10 @@ class Substation(models.Model):
 
 
     @staticmethod
-    def get_sub_for_city(city):
-        city = slugify(city, allow_unicode=True)
-        return Substation.objects.all().filter(city=city)
+    def get_sub_for_city(city, transle=None):
+        if transle is None:
+            city = slugify(city, allow_unicode=True)
+            return Substation.objects.all().filter(city=city)
 
 
     @staticmethod
@@ -57,7 +68,7 @@ class Substation(models.Model):
         return Substation.objects.all().filter(view=view)
 
     def get_absolute_url(self):
-        return reverse('substation:substation_url', kwargs={'city': self.city, 'view': self.view, 'number': self.number})
+        return reverse('substation:search_url', kwargs={'city': self.city, 'view': self.view, 'number': self.number})
 
     def save(self, *args, **kwargs):
         self.number = slugify(self.number, allow_unicode=True)

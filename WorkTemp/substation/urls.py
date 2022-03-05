@@ -1,17 +1,41 @@
-from django.contrib.auth import views
-from django.urls import path, include
+# from django.contrib.auth import views
+from django.urls import path #, include
+# from django.http import HttpResponse
+from django.shortcuts import redirect, HttpResponse
+
 from . import views
-from django.http import HttpResponse
 
-
+app_name = 'substation'
 
 urlpatterns = [
-        path('', views.main_menu, name='main_menu'),
+    path('', views.redirect_in_all),
+    path('create/', lambda r:HttpResponse('create') , name='create'),
+    path('get/all/', views.get_all, name='all_url'),
+    path('get/<int:tp>/', views.get_one, name='get_url'),
+    path('get/<str:city>/', views.search_by_args, name='search_url'),
+    path('get/<str:city>/<str:view>/', views.search_by_args, name='search_url'),
+    path('get/<str:city>/<str:view>/<str:number>/', views.search_by_args, name='search_url'),
+
+
+
+
+    path('get/<str:city>/<str:view>/<str:number>/edit/', lambda *a,**kwargs:HttpResponse(f'тп едит {kwargs})'), name='edit_url'),
+
+    path('get/<str:city>/<str:view>/<str:number>/delete/', lambda *a,**kwargs:HttpResponse(f'тп делете {kwargs})'), name='delete_url'),
+
+    path('get/<str:city>/<str:view>/<str:number>/photo/', lambda *a,**k:HttpResponse(f'фотки подсьанций{k})'), name='photo_all_url'),
+
+    path('get/<str:city>/<str:view>/<str:number>/photo/lvl1', lambda *a,**kwargs:HttpResponse(f'нач. деф{kwargs})'), name='photo_lvl1_url'),
+
+    path('get/<str:city>/<str:view>/<str:number>/photo/lvl2', lambda *a,**kwargs:HttpResponse(f'ср. деф.{kwargs})'), name='photo_lvl2_url'),
+
+    path('get/<str:city>/<str:view>/<str:number>/photo/lvl3', lambda *a,**kwargs:HttpResponse(f'авар. деф{kwargs})'), name='photo_lvl3_url'),
+
 ]
 
 
 '''
-
+ 
 url_substation = ([
     path('', lambda request: redirect('tk:substation_all_url')),
     path('all/', SubstationViewAll.as_view(), name='substation_all_url'),

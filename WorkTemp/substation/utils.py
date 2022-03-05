@@ -42,3 +42,9 @@ def init_sub():
         Substation.objects.create(city=c, view=v, number=n)
     [print(i) for i in Substation.objects.all()]
 
+
+def run():
+    init_city()
+    init_view()
+    init_sub()
+
