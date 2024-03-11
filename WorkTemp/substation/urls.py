@@ -1,7 +1,7 @@
 # from django.contrib.auth import views
 from django.urls import path  # , include
 # from django.http import HttpResponse
-from django.shortcuts import redirect, HttpResponse
+from django.shortcuts import redirect, HttpResponse, render
 
 from . import views
 
@@ -9,8 +9,10 @@ app_name = 'substation'
 
 urlpatterns = [
     path('', lambda _: redirect('substation:all_url')),
+    path('123/', lambda _: render(_, 'test/1.html')),
     path('all/', views.SubstationsView.as_view(), name='all_url'),
-    path('<int:tp>/', views.get_substation_for_id, name='get_url'),
+    path('<int:pk>/', views.SubstationView.as_view(), name='get_url'),
+
     # path('create/', lambda r: HttpResponse('create'), name='create'),
     # path('<str:city>/', views.search_by_args, name='search_url'),
     # path('<str:city>/<str:view>/', views.search_by_args, name='search_url'),

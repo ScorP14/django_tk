@@ -17,9 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import render
 
+
+
+
 urlpatterns = [
-    path('', lambda request: render(request, 'main_menu.html')),
+    path('', lambda request: render(request, 'main/main_menu.html')),
     path('substation/', include('substation.urls')),
     # path('photo/', include('photo.urls')),
     path('admin/', admin.site.urls)
 ]
+
+
+# Надо создать шаблон для 404 ошибки
+def page_not_found_view(request, exception):
+    return render(request, 'basic.html', status=404)
+handler404 = page_not_found_view

@@ -5,7 +5,7 @@ from django.views import generic
 
 from .models import *
 
-paginator
+
 
 
 
@@ -13,13 +13,13 @@ class SubstationsView(generic.ListView):
     model = Substation
     template_name = "substation/all.html"
     context_object_name = "substations"
-    paginate_by = 10
+    paginate_by = 5
 
 
 class SubstationView(generic.DetailView):
     model = Substation
-    template_name = "substation/all.html"
-    context_object_name = "substations"
+    template_name = "substation/one.html"
+    context_object_name = "substation"
 
 
 
@@ -29,7 +29,7 @@ def get_substation_for_id(request, tp: int) -> HttpResponse:
     except Substation.DoesNotExist:
         return redirect('substation:all_url')
     context = {'substation': tp}
-    return render(request, 'substation/get_one.html', context)
+    return render(request, 'substation/one.html', context)
 
 
 def search_by_args(request, city, view=None, number=None):
@@ -42,11 +42,11 @@ def search_by_args(request, city, view=None, number=None):
             print(True)
         except Substation.DoesNotExist:
             return redirect('substation:all_url')
-        return render(request, 'substation/get_one.html', {'substation': tp})
+        return render(request, 'substation/one.html', {'substation': tp})
 
     try:
         tp = Substation.objects.get(pk=1)
     except Substation.DoesNotExist:
         return redirect('substation:all_url')
     context = {'substation': tp}
-    return render(request, 'substation/get_one.html', context)
+    return render(request, 'substation/one.html', context)
