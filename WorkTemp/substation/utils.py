@@ -23,14 +23,20 @@ number_list = [i for i in range(100)]
 
 def init_city():
     for i in city_list:
-        City.objects.create(name=i)
+        try:
+            City.objects.create(title=i)
+        except:
+            pass
     [print(i) for i in City.objects.all()]
 
 
 
 def init_view():
     for i in view_list:
-        View.objects.create(name=i)
+        try:
+            View.objects.create(title=i)
+        except:
+            pass
     [print(i) for i in View.objects.all()]
 
 
@@ -47,4 +53,3 @@ def run():
     init_city()
     init_view()
     init_sub()
-

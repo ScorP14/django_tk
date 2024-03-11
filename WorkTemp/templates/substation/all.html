@@ -1,54 +1,50 @@
 {% extends "basic.html" %}
 {% block content %}
-{% for tp in substation %}
-<div class="col-md-4">
-    <h2>{{tp.city}}</h2>
-    <p>{{tp.city}}-
-    {{tp.number}}</p>
-    <p><a class="btn btn-secondary" href="#" role="button">Читать далее »</a></p>
-</div>
-{% endfor %}
 
 <table class="table">
     <thead>
-        <tr>
-            <th>№ чека</th>
-            <th>Способ платежа</th>
-            <th>Дата платежа</th>
-            <th>Сумма</th>
-        </tr>
+    <tr>
+        <th>id</th>
+        <th>Город</th>
+        <th>Тип</th>
+        <th>Номер</th>
+    </tr>
     </thead>
     <tbody>
-        <tr class="active">
-            <td>2803</td>
-            <td>Наличные</td>
-            <td>04.08.2014</td>
-            <td>2005.00</td>
-        </tr>
-        <tr class="success">
-            <td>2804</td>
-            <td>Карта VISA</td>
-            <td>04.08.2014</td>
-            <td>1270.00</td>
-        </tr>
-        <tr class="info">
-            <td>2805</td>
-            <td>Наличные</td>
-            <td>05.08.2014</td>
-            <td>1356.50</td>
-        </tr>
-        <tr class="warning">
-            <td>2806</td>
-            <td>Наличные</td>
-            <td>05.08.2014</td>
-            <td>5200.05</td>
-        </tr>
-        <tr class="danger">
-            <td>2807</td>
-            <td>Карта VISA</td>
-            <td>06.08.2014</td>
-            <td>315.70</td>
-        </tr>
+
+    {% for tp in substations %}
+    <tr>
+        <td>{{tp.pk}}</td>
+        <td>{{tp.city}}</td>
+        <td>{{tp.view}}</td>
+        <td>{{tp.number}}</td>
+    </tr>
+    {% endfor %}
+
     </tbody>
 </table>
+
+
+<ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+        <a class="page-link" href="?page=1">Первая</a>
+    </li>
+    {% endif %}
+    {% if page_obj.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+    {% endif %}
+    <li class="page-item disabled"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+    {% endif %}
+    {% if page_obj.has_next %}
+
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последная</a>
+    </li>
+    {% endif %}
+</ul>
+
+
 {% endblock %}

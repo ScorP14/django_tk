@@ -1,41 +1,29 @@
-from django.shortcuts import (
-        render, 
-        redirect, 
-        get_object_or_404
-        )
+from django.core import paginator
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views import generic
+
 from .models import *
-# Create your views here.
 
-
-def redirect_in_all(request):
-    return redirect('substation:all_url')
-'''
-
-'accepted_types', 'accepts', 'body', 
-'build_absolute_uri', 'close', 'content_params', 
-'content_type', 'csrf_processing_done', 'encoding', 
-'environ', 'get_full_path', 'get_full_path_info', 
-'get_host', 'get_port', 'get_signed_cookie',
-'headers', 'is_secure', 'method', 'parse_file_upload', 
-'path', 'path_info', 'read', 'readline', 'readlines', 
-'resolver_match', 'scheme', 'session', 
-'upload_handlers', 
-
-'''
-
-def get_all(request):
-    r = request
-    print(r.content_params)
-    import random
-    rc = random.choice
-    tp = [rc(Substation.objects.all()) for _ in range(3)]
-    context = {'substation': tp}
-    return render(request, 'substation/all.html', context)
+paginator
 
 
 
+class SubstationsView(generic.ListView):
+    model = Substation
+    template_name = "substation/all.html"
+    context_object_name = "substations"
+    paginate_by = 10
 
-def get_one(request, tp):
+
+class SubstationView(generic.DetailView):
+    model = Substation
+    template_name = "substation/all.html"
+    context_object_name = "substations"
+
+
+
+def get_substation_for_id(request, tp: int) -> HttpResponse:
     try:
         tp = Substation.objects.get(pk=tp)
     except Substation.DoesNotExist:
@@ -44,24 +32,9 @@ def get_one(request, tp):
     return render(request, 'substation/get_one.html', context)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def search_by_args(request, city, view=None, number=None):
     print(city, view, number)
-    w =Substation.objects.all()[1]
+    w = Substation.objects.all()[1]
     print(w.city.name_transle)
     if number:
         try:
@@ -69,9 +42,7 @@ def search_by_args(request, city, view=None, number=None):
             print(True)
         except Substation.DoesNotExist:
             return redirect('substation:all_url')
-        return render(request, 'substation/get_one.html', {'substation':tp})
-
-
+        return render(request, 'substation/get_one.html', {'substation': tp})
 
     try:
         tp = Substation.objects.get(pk=1)

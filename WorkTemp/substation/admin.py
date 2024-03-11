@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+
+from .models import Substation, City, View
+
+admin.site.register(Substation)
+admin.site.register(City)
+admin.site.register(View)
