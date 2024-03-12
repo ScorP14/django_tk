@@ -5,7 +5,10 @@ from django.shortcuts import HttpResponse
 from . import views
 
 
+
 def test_func(request):
+    from .models import Substation, RepositorySubstation
+    RepositorySubstation.get_all_substation_from_city('Усолье')
     return HttpResponse('')
 
 
