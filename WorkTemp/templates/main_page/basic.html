@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-{% include 'main/nav_bar.html' %}
+{% include 'main_page/nav_bar.html' %}
 <main role="main">
-    {% include 'main/greetings.html' %}
+    {% include 'main_page/greetings.html' %}
     <div class="container">
         <div class="row">
             {% block content %}
@@ -24,7 +24,7 @@
         </div>
     </div>
 </main>
-{% include 'main/footer.html' %}
+{% include 'main_page/footer.html' %}
 </body>
-{% include 'main/script.html' %}
+{% include 'main_page/script.html' %}
 </html>

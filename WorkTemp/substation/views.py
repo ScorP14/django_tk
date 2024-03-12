@@ -9,14 +9,14 @@ from .models import *
 
 
 
-class SubstationsView(generic.ListView):
+class SubstationsListView(generic.ListView):
     model = Substation
     template_name = "substation/all.html"
     context_object_name = "substations"
-    paginate_by = 5
+    paginate_by = 10
 
 
-class SubstationView(generic.DetailView):
+class SubstationDetailView(generic.DetailView):
     model = Substation
     template_name = "substation/one.html"
     context_object_name = "substation"

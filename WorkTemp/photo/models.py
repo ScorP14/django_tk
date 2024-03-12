@@ -15,7 +15,7 @@ class Photo(models.Model):
     number_cell = models.CharField('Номер узла', max_length=15)         
     element = models.CharField('Элемент', max_length=100, blank=True)                               
     defect_element = models.CharField('Дефектный элемент', max_length=100, blank=True)      
-    
+    # complete = True/False
     t0 = models.IntegerField('Темп. OC', default=0) 
     ta = models.IntegerField('Темп. фазы - "А"', default=0)                                         
     tb = models.IntegerField('Темп. фазы - "Б"', default=0)                                     

@@ -1,4 +1,4 @@
-{% extends "main/basic.html" %}
+{% extends "main_page/basic.html" %}
 {% block content %}
 
 <table class="table">
@@ -24,32 +24,40 @@
 </table>
 
 
-
-{% with count_space=2 %}
-
 {% load paginator_tags %}
-{% get_proper_elided_page_range paginator page_obj.number count_space as page_range %}
+{% get_proper_elided_page_range paginator page_obj.number 2 as page_range %}
 
 <ul class="pagination justify-content-center">
     {% for i in page_range %}
 
-        {% if i == paginator.ELLIPSIS %}
+    {% if i == paginator.ELLIPSIS %}
 
-        {{page_obj}}
-         {{forloop.index}}
-        <li class="page-item">
-             <a class="page-link " >{{ paginator.ELLIPSIS }}</a>
-        </li>
+    {{page_obj}}
+
+    <li class="page-item">
+        <a class="page-link ">{{ paginator.ELLIPSIS }}</a>
+    </li>
 
 
-
-        {% else %}
-            <li class="page-item">
-                <a class="page-link {% if i == page_obj.number %}disabled{% endif %}" href="?page={{i}}">{{i}}</a>
-            </li>
-        {% endif %}
+    {% else %}
+    <li class="page-item">
+        <a class="page-link {% if i == page_obj.number %}disabled{% endif %}" href="?page={{i}}">{{i}}</a>
+    </li>
+    {% endif %}
 
     {% endfor %}
 </ul>
-{% endwith %}
+
+{% if is_paginated %}
+    {% for page_number in page_obj.paginator.get_elided_page_range %}
+        {% if page_number == page_obj.paginator.ELLIPSIS %}
+            {{page_number}}
+        {% else %}
+            <a href="?page={{ page_number }}" class="{% if page_number == page_obj.number %}current{% endif %}">
+                {{page_number}}
+            </a>
+        {% endif %}
+    {% endfor %}
+{%endif%}
+
 {% endblock %}
