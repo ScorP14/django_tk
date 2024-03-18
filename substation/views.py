@@ -6,7 +6,10 @@ from .forms import SubstationForm
 from .models import Substation
 
 
-
+class SubstationCreateView(generic.CreateView):
+    model = Substation
+    form_class = SubstationForm
+    template_name = 'substation/create.html'
 
 
 class SubstationsListView(generic.ListView):
@@ -32,7 +35,6 @@ class SubstationDeleteView(generic.DeleteView):
     model = Substation
     template_name = 'substation/delete.html'
     success_url = '/'
-
 
 
 def get_substation_for_id(request, tp: int) -> HttpResponse:

@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'substation.apps.SubstationConfig',
+    'city.apps.CityConfig',
+
 ]
 
 MIDDLEWARE = [

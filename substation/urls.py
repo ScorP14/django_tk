@@ -7,14 +7,23 @@ from . import views
 from .forms import SubstationForm
 
 
+
+urlpatterns_city = (
+[
+    path('', lambda r: HttpResponse('Все сити'), name='city_all'),
+    path('<str:pk>/', lambda r, pk: HttpResponse(f'Один Сити'), name='city_one'),
+],
+    'city_url'
+)
+
+
+
 app_name = 'substation'
 urlpatterns = [
     path('search/', lambda r: HttpResponse('search'), name='search_url'),
-    path('create/', lambda r: HttpResponse('create'), name='create_url'),
+    path('create/', views.SubstationCreateView.as_view(), name='create_url'),
     #
     path('', views.SubstationsListView.as_view(), name='all_url'),
-
-    # path('city/', include(city_urls)),
 
     # -------------------------------
     # -------URL Substation----------

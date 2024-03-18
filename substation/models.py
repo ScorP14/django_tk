@@ -5,32 +5,11 @@ from django.urls import reverse
 
 from pytils.translit import slugify
 
+from city.models import City, View
+
 
 class AddColumQuerySetForModel:
     objects = models.QuerySet()
-
-
-class BaseModel(models.Model):
-    title = models.CharField('Название', max_length=50, primary_key=True, unique=True)
-
-    def __str__(self) -> str:
-        return f'{self.pk}'
-
-    class Meta:
-        abstract = True
-
-
-class City(AddColumQuerySetForModel, BaseModel):
-    class Meta:
-        verbose_name = 'Город'
-        verbose_name_plural = 'Города'
-
-
-class View(AddColumQuerySetForModel, BaseModel):
-    class Meta:
-        verbose_name = 'Тип подстанции'
-        verbose_name_plural = 'Типы подстанций'
-
 
 class Substation(AddColumQuerySetForModel, models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)

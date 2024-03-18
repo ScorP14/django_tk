@@ -22,24 +22,19 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-# qwe = '<a class="dropdown-item" href="{% url \'substation:all_url\' %}">Просмотр</a>'
-# city_urls = (
-#
-# [
-#     path('', lambda r: HttpResponse('city11'), name='city_all'),
-#     path('<str:pk>', lambda r, pk: HttpResponse(f'create{qwe}'), name='city_one'),
-# ],
-#     'city_url'
-# )
+
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', lambda request: render(request, 'main_page/main_menu.html')),
-
     path('substation/', include('substation.urls')),
-    # path('city/', include(city_urls)),
+
+
+    path('city/', include('city.urls')),
+
+
     # # path('photo/', include('photo.urls')),
-    path('admin/', admin.site.urls)
 ]
 
 

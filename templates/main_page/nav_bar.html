@@ -16,17 +16,36 @@
                        aria-expanded="false">Подстанции
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'substation:all_url' %}">Просмотр</a></li>
-                        <li><a class="dropdown-item" href="{% url 'substation:create_url' %}">Создать</a></li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'substation:all_url' %}">Просмотр</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'substation:create_url' %}">Создать</a>
+                        </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Добавить город в список</a></li>
-                        <li><a class="dropdown-item" href="#">Добавить тип подстанции</a></li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'city:all_url' %}">Список городов</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'city:create_url' %}">Добавить город</a>
+                        </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#">Список типов ТП</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Добавить Тип</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Что-то еще здесь</a>
+                        </li>
                     </ul>
                 </li>
 
