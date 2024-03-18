@@ -1,0 +1,11 @@
+{% extends "main_page/basic.html" %}
+{% block title %} {{ substation.view|upper }}-{{ substation.number|upper }} Удаление {% endblock %}
+{% block content %}
+<h2 class="card-title">
+    {{ substation.city|title }}: {{substation.view|upper}} - {{ substation.number|upper }} Удалить?
+</h2>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-success rounded-pill px-3" type="submit">Удалить</button>
+</form>
+{% endblock %}
