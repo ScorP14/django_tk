@@ -19,13 +19,14 @@ class SubstationsListView(generic.ListView):
 class SubstationDetailView(generic.DetailView):
     model = Substation
     template_name = "substation/one.html"
-    context_object_name = "work_temp"
+    context_object_name = "substation"
 
 
 class SubstationUpdateView(generic.UpdateView):
     model = Substation
     form_class = SubstationForm
     template_name = 'substation/update.html'
+
 
 class SubstationDeleteView(generic.DeleteView):
     model = Substation
