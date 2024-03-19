@@ -1,15 +1,12 @@
 from django.db import models
 from django.db.models import QuerySet
 from django.urls import reverse
-# from django.core.validators import validate_slug
 
 from pytils.translit import slugify
 
 from city.models import City, View
+from helper.models import AddColumQuerySetForModel
 
-
-class AddColumQuerySetForModel:
-    objects = models.QuerySet()
 
 class Substation(AddColumQuerySetForModel, models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)

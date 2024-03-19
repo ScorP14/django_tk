@@ -1,24 +1,17 @@
-from django.db import models
+from django.urls import reverse
 
-
-class AddColumQuerySetForModel:
-    objects = models.QuerySet()
-
-
-class BaseModel(models.Model):
-    title = models.CharField('Название', max_length=50, primary_key=True, unique=True)
-
-    def __str__(self) -> str:
-        return f'{self.pk}'
-
-    class Meta:
-        abstract = True
+from helper.models import AddColumQuerySetForModel, BaseModel
 
 
 class City(AddColumQuerySetForModel, BaseModel):
+
+
     class Meta:
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
+
+    def get_absolute_url(self):
+        return reverse('city:get_one_url', kwargs={'slug': self.slug})
 
 
 class View(AddColumQuerySetForModel, BaseModel):

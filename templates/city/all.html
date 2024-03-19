@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "main_page/basic.html" %}
+{% block content %}
 
-</body>
-</html>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Город</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for city in citys %}
+    <tr>
+        <td>
+            <a href="{{ city.get_absolute_url }}">{{city.pk}}</a>
+        </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% load paginator_tags %}
+{% get_proper_elided_page_range paginator page_obj.number 2 as page_range %}
+
+<ul class="pagination justify-content-center">
+    {% for i in page_range %}
+
+    {% if i == paginator.ELLIPSIS %}
+
+    {{page_obj}}
+
+    <li class="page-item">
+        <a class="page-link ">{{ paginator.ELLIPSIS }}</a>
+    </li>
+
+
+    {% else %}
+    <li class="page-item">
+        <a class="page-link {% if i == page_obj.number %}disabled{% endif %}" href="?page={{i}}">{{i}}</a>
+    </li>
+    {% endif %}
+
+    {% endfor %}
+</ul>
+
+{% if is_paginated %}
+{% for page_number in page_obj.paginator.get_elided_page_range %}
+{% if page_number == page_obj.paginator.ELLIPSIS %}
+{{page_number}}
+{% else %}
+<a href="?page={{ page_number }}" class="{% if page_number == page_obj.number %}current{% endif %}">
+    {{page_number}}
+</a>
+{% endif %}
+{% endfor %}
+{%endif%}
+{% endblock %}
