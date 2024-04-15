@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import generic
 
 from .forms import SubstationForm
-from .models import Substation
+from .models import Substation, RepositorySubstation
 
 
 class SubstationCreateView(generic.CreateView):
@@ -11,6 +12,25 @@ class SubstationCreateView(generic.CreateView):
     form_class = SubstationForm
     template_name = 'substation/create.html'
 
+    def post(self,  req):
+        form = SubstationForm(req.POST)
+
+        # print(req.POST['city'])
+        tp = RepositorySubstation.get_or_none(city=req.POST['city'], view=req.POST['view'], number=req.POST['number'])
+        # print(tp)
+        # if form.is_valid():
+        #     if RepositorySubstation.get()
+        return HttpResponse('Possst')
+
+   # form = ReviewForm(request.POST)
+   #      movie = Movie.objects.get(id=pk)
+   #      if form.is_valid():
+   #          form = form.save(commit=False)
+   #          if request.POST.get("parent", None):
+   #              form.parent_id = int(request.POST.get("parent"))
+   #          form.movie = movie
+   #          form.save()
+   #      return redirect(movie.get_absolute_url())
 
 class SubstationsListView(generic.ListView):
     model = Substation
@@ -34,7 +54,9 @@ class SubstationUpdateView(generic.UpdateView):
 class SubstationDeleteView(generic.DeleteView):
     model = Substation
     template_name = 'substation/delete.html'
-    success_url = '/'
+
+    def get_success_url(self):
+        return reverse('substation:all_url')
 
 
 def get_substation_for_id(request, tp: int) -> HttpResponse:

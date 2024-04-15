@@ -6,18 +6,6 @@ from django.shortcuts import HttpResponse, render, redirect
 from . import views
 from .forms import SubstationForm
 
-
-
-urlpatterns_city = (
-[
-    path('', lambda r: HttpResponse('Все сити'), name='city_all'),
-    path('<str:pk>/', lambda r, pk: HttpResponse(f'Один Сити'), name='city_one'),
-],
-    'city_url'
-)
-
-
-
 app_name = 'substation'
 urlpatterns = [
     path('search/', lambda r: HttpResponse('search'), name='search_url'),

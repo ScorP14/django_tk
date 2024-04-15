@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import QuerySet
 from django.urls import reverse
 
+
 from pytils.translit import slugify
 
 from city.models import City, View
@@ -28,7 +29,6 @@ class Substation(AddColumQuerySetForModel, models.Model):
         ordering = ['city', 'view', 'number']
         verbose_name = 'Подстанция'
         verbose_name_plural = 'Подстанции'
-
 
 
 '''
@@ -64,23 +64,43 @@ class Photo(models.Model):
         verbose_name_plural = 'Снимки'
 '''
 
+import pydantic
+from pydantic import field_validator
+
+class AdapterCity(pydantic.BaseModel):
+    title: str
+
+
+    @field_validator('title')
+    @classmethod
+    def name_must_contain_space(cls, v: str) -> str:
+        if ' ' not in v:
+            raise ValueError('must contain a space')
+        return v.title()
+
+
+
+
+
+
+
+
 class RepositoryCity:
     @staticmethod
     def validator(item: str) -> str:
-        """Валидация данных"""
+        """Валидация данных
+        Возможно, надо дополнить"""
         valid_item = item.lower()
         return valid_item
 
     @staticmethod
     def get_or_create(item: str) -> City:
         """Создание записи или ее получение"""
-
         return City.objects.get_or_create(title=RepositoryCity.validator(item))[0]
 
     @staticmethod
     def get(item: str) -> City:
-        """Создание записи или ее получение"""
-        print(item, RepositoryCity.validator(item))
+        """Получение записи"""
         return City.objects.get(title=RepositoryCity.validator(item))
 
 
@@ -89,6 +109,7 @@ class RepositoryView:
     def validator(item: str) -> str:
         """Валидация данных"""
         valid_item = item.lower()
+        print(f'{valid_item=})')
         return valid_item
 
     @staticmethod
@@ -96,10 +117,27 @@ class RepositoryView:
         """Создание записи или ее получение"""
         return View.objects.get_or_create(title=RepositoryView.validator(item))[0]
 
+    def get(item: str) -> View:
+        """Создание записи или ее получение"""
+        return View.objects.get(title=RepositoryView.validator(item))
+
 
 class RepositorySubstation:
     @staticmethod
     def get_all_substation_from_city(city: str) -> QuerySet:
         """Возвращает QuerySet всех подстанций в городе(city)"""
         city = RepositoryCity.get(city)
-        return Substation.objects.all().filter(city=city)
+        return Substation.objects.all().filter(city=city).order_by('city')
+
+    @staticmethod
+    def get_or_none(city: str, view: str, number: str) -> Substation:
+        """Возвращает тп"""
+
+        city = RepositoryCity.get(city)
+        view = RepositoryView.get(view)
+        try:
+            tp = Substation.objects.get(city=city, view=view, number=number)
+            return tp
+        except models.ObjectDoesNotExist as e:
+            print(e, 'Ошибка')
+            return False
