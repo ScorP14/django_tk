@@ -1,7 +1,7 @@
 <!doctype html>
 {% load static %}
 <html lang="ru">
-<head>
+<head class="h-100">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Главная{% endblock %} - ЭТЛ-ТК </title>
@@ -14,32 +14,30 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="icon" href="{% static 'favicon.ico' %}"/>
 </head>
+
 <body class="d-flex flex-column h-100">
-
-
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" aria-label="Fourth navbar example">
+<!--Навигация-->
+<header>
     {% include 'main_page/nav_bar.html' %}
-</nav>
+</header>
 
-<section class="py-5 text-center container">
-    {% include 'helpers/greetings.html' %}
-</section>
-
-<main role="main">
+<!--Главный контент-->
+<main class="flex-shrink-0" role="main">
     <div class="py-5 text-center container">
-        <div class="row">
-            {% block content %}
-            {% endblock %}
-        </div>
+
+        {% block content %}
+        {% endblock %}
+
     </div>
 </main>
 
-<footer class="footer mt-auto py-3 bg-body-tertiary">
+
+<footer class="footer mt-auto py-3 bg-light">
     {% include 'main_page/footer.html' %}
 </footer>
+
 </body>
-{% include 'main_page/script.html' %}
+    {% include 'main_page/script.html' %}
 </html>
 
 

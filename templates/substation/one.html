@@ -1,53 +1,51 @@
 {% extends "main_page/basic.html" %}
-{% block title %} {{ substation.view|upper }}-{{ substation.number|upper }}, {{substation.city|title}} {% endblock %}
+{% block title %} {{ substation.view|upper }}-{{ substation.number|upper }}: {{substation.city|title}} {% endblock %}
 {% block content %}
 <div class="container">
-    <div class="card bg-light shadow-sm ">
-        <div class="card-body text-left">
-            <h2 class="card-title">
-                {{ substation.city|title }}: {{substation.view|upper}} - {{ substation.number|upper }}
-            </h2>
-
-            <button class="btn btn-warning rounded-pill px-3" type="button">
-                <a href="{% url 'substation:update'  substation.slug %}">
-                    Редактировать
-                </a>
-            </button>
-            <button class="btn btn-danger rounded-pill px-3" type="button">
-                <a href="{% url 'substation:delete'  substation.slug %}">
-                    Удалить
-                </a>
-            </button>
-
-            <p class="card-text">Расположение подстанции: Не известно</p>
-            <p class="card-text">Количество снимков: {{tp.count_photo}} <br>Из них:<br>
-                <span class="text-success">Дефектов нет: {{tp.count_ok}}</span><br>
-                <span class="text-success">Начальный дефект:{{tp.count_1lv}}</span><br>
-                <span class="text-warning">Развившийся дефект:{{tp.count_2lv}}</span><br>
-                <span class="text-danger">Аварийный дефект:{{tp.count_3lv}}</span><br></p>
-            <div class="container">
-                <table class="table table-dark table-hover">
-                    <thead>
-                    <tr>
-                        <th>Количество снимков</th>
-                        <th>Дефектов нет</th>
-                        <th>Начальный дефект</th>
-                        <th>Развившийся дефект</th>
-                        <th>Аварийный дефект</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{tp.count_photo}}</td>
-                        <td class="text-success">{{tp.count_ok}}</td>
-                        <td class="text-success">{{tp.count_1lv}}</td>
-                        <td class="text-warning">{{tp.count_2lv}}</td>
-                        <td class="text-danger">{{tp.count_3lv}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="card  bg-light shadow-sm ">
+        <div class="card-header text-start fs-3">
+            {{ substation.city|title }}: {{substation.view|upper}} - {{ substation.number|upper }}
+        </div>
+        <div class="card-body text-start">
+            <span> Расположение подстанции: Не известно</span><br>
+            <span> Количество снимков: 20</span><br>
+            <span class="text-success">Дефектов нет: 10</span><br>
+            <span class="text-success">Начальный дефект: 10</span><br>
+            <span class="text-warning">Развившийся дефект: 10</span><br>
+            <span class="text-danger">Аварийный дефект: 10</span><br>
+        </div>
+        <div class="card-footer text-end">
+            <a class="btn btn-success rounded-pill" href="{% url 'substation:create' %}" role="button">Создать новую</a>
+            <a class="btn btn-warning rounded-pill" href="{% url 'substation:update' substation.slug %}" role="button">Редактировать</a>
+            <a class="btn btn-danger rounded-pill" href="{% url 'substation:delete'  substation.slug %}" role="button">Удалить</a>
         </div>
     </div>
 </div>
+
+<div class="container">
+
+    <p></p>
+    <table class="table table-striped table-dark table-hover">
+        <thead>
+        <tr>
+            <th>Количество снимков</th>
+            <th>Дефектов нет</th>
+            <th>Начальный дефект</th>
+            <th>Развившийся дефект</th>
+            <th>Аварийный дефект</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>6</td>
+            <td class="text-success">1</td>
+            <td class="text-success">2</td>
+            <td class="text-warning">3</td>
+            <td class="text-danger">4</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

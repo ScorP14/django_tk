@@ -1,32 +1,48 @@
 {% extends "main_page/basic.html" %}
-{% block content %}
+{% block title %}
+Подстанции
+{% endblock %}
 
-<table class="table">
-    <thead>
+{% block content %}
+<div class="container">
+    <div class="card bg-light shadow-sm">
+        <div class="card-header text-start">
+            Подстанции
+        </div>
+        <div class="card-body text-start">
+            <h5 class="card-title">Особое обращение с заголовком</h5>
+            <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
+                контенту.</p>
+            <a href="#" class="btn btn-primary">Добавить подстанцию</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
         <tr>
             <th>id</th>
             <th>Город</th>
             <th>Тип</th>
             <th>Номер</th>
         </tr>
-    </thead>
-    <tbody>
-    {% for tp in substations %}
-    <tr>
-        <td><a href="{{ tp.get_absolute_url }}">
-             {{tp.pk}}
-        </a>
+        </thead>
+        <tbody>
+        {% for tp in substations %}
+        <tr>
+            <td><a href="{{ tp.get_absolute_url }}">
+                {{tp.pk}}
+            </a>
             </td>
-        <td>{{tp.city}}</td>
-        <td>{{tp.view}}</td>
-        <td>{{tp.number}}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+            <td>{{tp.city}}</td>
+            <td>{{tp.view}}</td>
+            <td>{{tp.number}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-{% if page_obj %}
+
+    {% if page_obj %}
     {% include 'helpers\pagination.html' %}
-{% endif %}
-
+    {% endif %}
+</div>
 {% endblock %}

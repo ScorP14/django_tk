@@ -20,7 +20,7 @@ class Substation(AddColumQuerySetForModel, models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('substation:get_one_url', kwargs={'slug': self.slug})
+        return reverse('substation:get_one', kwargs={'slug': self.slug})
 
     def __str__(self) -> str:
         return f'{self.city}:{self.view}-{self.number}'

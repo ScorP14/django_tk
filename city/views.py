@@ -11,6 +11,10 @@ class CityListView(generic.ListView):
     context_object_name = "citys"
     paginate_by = 10
 
+    def get_queryset(self):
+        return super().get_queryset().order_by('title')
+
+
 
 class CityDetailView(generic.DetailView):
     model = models.City

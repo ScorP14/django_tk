@@ -1,39 +1,28 @@
 from django.urls import path
 
-from django.shortcuts import HttpResponse, render, redirect
+from django.shortcuts import HttpResponse, render
 
 from city import views
 
 
-def render_xz(request):
-    from city.models import RepositoryCity
-    from city.models import City
-    q = RepositoryCity.get_all()
-    print(q, type(q))
-
-
-    return HttpResponse('city')
-
-
-
-
-
-
-
+def test(request):
+    context = {
+        'obj': [f'Город - {i}' for i in range(50)]
+    }
+    return render(request, 'test.html', context)
 
 
 app_name = 'city'
 urlpatterns = [
-    # path('', render_xz, name='all_url'),
-    path('', views.CityListView.as_view(), name='all_url'),
+    path('test/', lambda r: test(r), name='1'),
 
-    path('create/', lambda r: HttpResponse('Создать сити'), name='create_url'),
-    path('<str:pk>/', lambda r, pk: HttpResponse(f'Один {pk}'), name='city_one'),
-    # path('search/', lambda r: HttpResponse('search'), name='search_url'),
-
+    path('', views.CityListView.as_view(), name='all'),
+    path('create/', lambda r: HttpResponse('Создать сити create'), name='create'),
+    path('<str:pk>/', lambda r, pk: HttpResponse(f'Один {pk=}'), name='one'),
+    path('search/', lambda r: HttpResponse('search'), name='search'),
     path('<slug:slug>/update/', views.CityUpdateView.as_view(), name='update'),
     path('<slug:slug>/delete/', views.CityDeleteView.as_view(), name='delete'),
-    path('<slug:slug>/', views.CityDetailView.as_view(), name='get_one_url'),
+    path('<slug:slug>/', views.CityDetailView.as_view(), name='get_one'),
 ]
 
 
