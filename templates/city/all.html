@@ -1,26 +1,35 @@
 {% extends "main_page/basic.html" %}
+{% block title %}Города{% endblock %}
 {% block content %}
-<table class="table">
-    <thead>
+<div class="container">
+    <div class="card bg-light shadow-sm">
+        <div class="card-header text-start fs-3">Список городов</div>
+        <div class="card-body text-start">
+            <h5 class="card-title">Особое обращение с заголовком</h5>
+            <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
+                контенту.</p>
+            <a href="#" class="btn btn-primary">Добавить подстанцию</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
         <tr>
             <th>Город</th>
         </tr>
-    </thead>
-    <tbody>
-    {% for city in citys %}
-    <tr>
-        <td>
-            <a href="{{ city.get_absolute_url }}">{{city.pk}}</a>
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-{% if page_obj %}
+        </thead>
+        <tbody>
+        {% for city in citys %}
+        <tr>
+            <td><a href="{{ city.get_absolute_url }}">{{city.pk}}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if page_obj %}
     {% include 'helpers\pagination.html' %}
-{% endif %}
-
+    {% endif %}
+</div>
 {% endblock %}
 
 

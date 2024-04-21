@@ -18,11 +18,12 @@ urlpatterns = [
 
     path('', views.CityListView.as_view(), name='all'),
     path('create/', lambda r: HttpResponse('Создать сити create'), name='create'),
-    path('<str:pk>/', lambda r, pk: HttpResponse(f'Один {pk=}'), name='one'),
     path('search/', lambda r: HttpResponse('search'), name='search'),
     path('<slug:slug>/update/', views.CityUpdateView.as_view(), name='update'),
     path('<slug:slug>/delete/', views.CityDeleteView.as_view(), name='delete'),
     path('<slug:slug>/', views.CityDetailView.as_view(), name='get_one'),
+
+    path('<str:pk>/', lambda r, pk: HttpResponse(f'Один {pk=}'), name='one'),
 ]
 
 
