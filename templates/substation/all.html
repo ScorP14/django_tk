@@ -27,15 +27,7 @@
 </table>
 
 
-{% load paginator_tags %}
-{% get_proper_elided_page_range paginator page_obj.number as page_nums_range %}
+{% if page_obj %}
+    {% include 'main_page\pagination.html' %}
+{% endif %}
 
-<ul class="pagination justify-content-center">
-    {% for i in page_nums_range %}
-        <li class="page-item">
-            <a class="page-link {% if i == page_obj.number %}disabled{% endif %}" href="?page={{i}}">{{i}}</a>
-        </li>
-    {% endfor %}
-</ul>
-
-{% endblock %}

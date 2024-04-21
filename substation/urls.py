@@ -27,11 +27,3 @@ urlpatterns = [
 
 
 
-'''
-http://127.0.0.1:8000/photo/search/<int:year>/<int:month>/<int:day>/
-http://127.0.0.1:8000/photo/2024-02-20-iv-01555/substation/     --->    /work_temp/ysole-gpp-1/
-http://127.0.0.1:8000/photo/2024-02-20-iv-01555/update/
-http://127.0.0.1:8000/photo/2024-02-20-iv-01555/delete/
-http://127.0.0.1:8000/photo/2024-02-20-iv-01555/
-http://127.0.0.1:8000/photo/
-'''
