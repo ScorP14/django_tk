@@ -11,7 +11,6 @@
         </tr>
     </thead>
     <tbody>
-
     {% for tp in substations %}
     <tr>
         <td><a href="{{ tp.get_absolute_url }}">
@@ -26,8 +25,8 @@
     </tbody>
 </table>
 
-
 {% if page_obj %}
-    {% include 'main_page\pagination.html' %}
+    {% include 'helpers\pagination.html' %}
 {% endif %}
 
+{% endblock %}
