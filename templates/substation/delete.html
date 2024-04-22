@@ -1,11 +1,20 @@
 {% extends "main_page/basic.html" %}
 {% block title %} {{ substation.view|upper }}-{{ substation.number|upper }} Удаление {% endblock %}
 {% block content %}
-<h2 class="card-title">
-    {{ substation.city|title }}: {{substation.view|upper}} - {{ substation.number|upper }} Удалить?
-</h2>
-<form method="post">
-    {% csrf_token %}
-    <button class="btn btn-success rounded-pill px-3" type="submit">Удалить</button>
-</form>
+
+<div class="container">
+    <div class="card  bg-light shadow-sm ">
+        <div class="card-header text-start fs-3">
+            {{ substation.city|title }}: {{ substation.view|upper }} - {{ substation.number|upper }} Удалить?
+        </div>
+        <form method="post">{% csrf_token %}
+            <div class="card-footer text-end">
+                <input type="submit" class="btn btn-success rounded-pill px-3"
+                       value="Удалить?">
+            </div>
+        </form>
+    </div>
+</div>
+
+
 {% endblock %}

@@ -1,15 +1,5 @@
-{% extends "main_page/basic.html" %}
+{% extends 'substation\abstract_template\form.html' %}
 {% block title %} {{ substation.view|upper }}-{{ substation.number|upper }} Редактирование {% endblock %}
-{% block content %}
+{% block card_header %}Редактирование {{ substation.city|title }}: {{ substation.view|upper }}-{{ substation.number}}{% endblock %}
+{% block btn_text %}Сохранить{% endblock %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.management_form }}
-    {% for f in form %}
-        {{ f }}
-    {% endfor %}
-    <button class="btn btn-success rounded-pill px-3" type="submit">OK</button>
-
-</form>
-
-{% endblock %}

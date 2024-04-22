@@ -4,12 +4,12 @@
 {% block content %}
 <div class="container">
     <div class="card bg-light shadow-sm">
-        <div class="card-header text-start fs-3"> Список подстанций</div>
+        <div class="card-header text-start fs-3">Список подстанций</div>
         <div class="card-body text-start">
             <h5 class="card-title">Особое обращение с заголовком</h5>
             <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
                 контенту.</p>
-            <a href="#" class="btn btn-primary">Добавить подстанцию</a>
+            <a href="{% url 'substation:create' %}" class="btn btn-primary">Добавить подстанцию</a>
         </div>
     </div>
     <table class="table">
@@ -35,7 +35,6 @@
         {% endfor %}
         </tbody>
     </table>
-
 
     {% if page_obj %}
     {% include 'helpers\pagination.html' %}
