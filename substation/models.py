@@ -2,11 +2,19 @@ from django.db import models
 from django.db.models import QuerySet
 from django.urls import reverse
 
-
 from pytils.translit import slugify
 
 from city.models import City, View
 from helper.models import AddColumQuerySetForModel
+
+
+class GetOrNoneManager(models.Manager):
+    def get_or_none(self, **kwargs):
+        try:
+            return self.get(**kwargs)
+
+        except self.model.DoesNotExist:
+            return None
 
 
 class Substation(AddColumQuerySetForModel, models.Model):
@@ -17,6 +25,9 @@ class Substation(AddColumQuerySetForModel, models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(f'{self.city}-{self.view}-{self.number}')
+        tp = Substation.objects.all().filter(city=self.city, view=self.view, number=self.number).first()
+        if self.pk is None and tp:
+            return tp.get_absolute_url()
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -31,22 +42,4 @@ class Substation(AddColumQuerySetForModel, models.Model):
         verbose_name_plural = 'Подстанции'
 
 
-class RepositorySubstation:
-    @staticmethod
-    def get_all_substation_from_city(city: str) -> QuerySet:
-        """Возвращает QuerySet всех подстанций в городе(city)"""
-        city = RepositoryCity.get(city)
-        return Substation.objects.all().filter(city=city).order_by('city')
 
-    @staticmethod
-    def get_or_none(city: str, view: str, number: str) -> Substation:
-        """Возвращает тп"""
-
-        city = RepositoryCity.get(city)
-        view = RepositoryView.get(view)
-        try:
-            tp = Substation.objects.get(city=city, view=view, number=number)
-            return tp
-        except models.ObjectDoesNotExist as e:
-            print(e, 'Ошибка')
-            return False

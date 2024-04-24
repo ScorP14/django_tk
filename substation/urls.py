@@ -6,9 +6,18 @@ from django.shortcuts import HttpResponse, render, redirect
 from . import views
 from .forms import SubstationForm
 
+
+
+
+def test_qwe(request):
+    from substation.models import Substation
+
+    return HttpResponse('qwe')
+
+
 app_name = 'substation'
 urlpatterns = [
-    path('search/', lambda r: HttpResponse('search'), name='search'),
+    path('search/', test_qwe, name='search'), # lambda r: HttpResponse('search')
     path('create/', views.SubstationCreateView.as_view(), name='create'),
     #
     path('', views.SubstationsListView.as_view(), name='all'),
