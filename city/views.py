@@ -2,9 +2,9 @@ from django.urls import reverse
 from django.views import generic
 
 from city import models, forms
+from substation.models import Substation
 
 
-# Create your views here.
 class CityListView(generic.ListView):
     model = models.City
     template_name = "city/all.html"
@@ -15,11 +15,15 @@ class CityListView(generic.ListView):
         return super().get_queryset().order_by('title')
 
 
-
 class CityDetailView(generic.DetailView):
     model = models.City
     template_name = "city/one.html"
     context_object_name = "city"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['count_substation'] = Substation.objects.filter(city=context['city'].pk).count()
+        return context
 
 
 class CityCreateView(generic.CreateView):
