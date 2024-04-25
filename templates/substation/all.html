@@ -1,43 +1,46 @@
-{% extends "main_page/basic.html" %}
+{% extends 'abstract_template\abs_card.html' %}
 {% block title %}Подстанции{% endblock %}
+{% block card_header %}Список подстанций{% endblock card_header %}
 
-{% block content %}
-<div class="container">
-    <div class="card bg-light shadow-sm">
-        <div class="card-header text-start fs-3">Список подстанций</div>
-        <div class="card-body text-start">
-            <h5 class="card-title">Особое обращение с заголовком</h5>
-            <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
-                контенту.</p>
-            <a href="{% url 'substation:create' %}" class="btn btn-primary">Добавить подстанцию</a>
-        </div>
-    </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>Город</th>
-            <th>Тип</th>
-            <th>Номер</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for tp in substations %}
-        <tr>
-            <td><a href="{{ tp.get_absolute_url }}">
-                {{tp.pk}}
-            </a>
-            </td>
-            <td>{{tp.city}}</td>
-            <td>{{tp.view}}</td>
-            <td>{{tp.number}}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block card_body %}
+<h5 class="card-title">Особое обращение с заголовком</h5>
+<p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
+    контенту.</p>
+{% endblock card_body %}
 
-    {% if page_obj %}
+{% block card_footer %}
+<a href="{% url 'substation:create' %}" class="btn btn-primary">Добавить подстанцию</a>
+{% endblock card_footer %}
+
+{% block body %}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Город</th>
+        <th scope="col">Тип</th>
+        <th scope="col">Номер</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for tp in substations %}
+    <tr>
+        <td><a href="{{ tp.get_absolute_url }}">
+            {{tp.pk}}
+        </a>
+        </td>
+        <td>{{tp.city}}</td>
+        <td>{{tp.view}}</td>
+        <td>{{tp.number}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if page_obj %}
     {% include 'helpers\pagination.html' %}
-    {% endif %}
-</div>
-{% endblock %}
+{% endif %}
+
+{% endblock body %}
+
