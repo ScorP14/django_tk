@@ -14,7 +14,7 @@
 
 {% block body %}
 
-<table class="table table-striped">
+<table class="table table-sm table-striped">
     <thead>
     <tr>
         <th scope="col">id</th>
@@ -26,10 +26,7 @@
     <tbody>
     {% for tp in substations %}
     <tr>
-        <td><a href="{{ tp.get_absolute_url }}">
-            {{tp.pk}}
-        </a>
-        </td>
+        <th scope="row"><a href="{{ tp.get_absolute_url }}">{{tp.pk}}</a></th>
         <td>{{tp.city}}</td>
         <td>{{tp.view}}</td>
         <td>{{tp.number}}</td>
@@ -39,8 +36,7 @@
 </table>
 
 {% if page_obj %}
-    {% include 'helpers\pagination.html' %}
+{% include 'helpers\pagination.html' %}
 {% endif %}
 
 {% endblock body %}
-

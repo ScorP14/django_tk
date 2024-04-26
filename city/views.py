@@ -22,7 +22,7 @@ class CityDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['count_substation'] = Substation.objects.filter(city=context['city'].pk).count()
+        context['count_substation'] = Substation.objects.filter(city=context['city']).count()
         return context
 
 
@@ -45,4 +45,4 @@ class CityDeleteView(generic.DeleteView):
     context_object_name = "city"
 
     def get_success_url(self):
-        return reverse('city:all_url')
+        return reverse('city:all')

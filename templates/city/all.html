@@ -1,35 +1,36 @@
-{% extends "main_page/basic.html" %}
+{% extends 'abstract_template\abs_card.html' %}
 {% block title %}Города{% endblock %}
-{% block content %}
-<div class="container">
-    <div class="card bg-light shadow-sm">
-        <div class="card-header text-start fs-3">Список городов</div>
-        <div class="card-body text-start">
-            <h5 class="card-title">Особое обращение с заголовком</h5>
-            <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
-                контенту.</p>
-            <a href="#" class="btn btn-primary">Добавить подстанцию</a>
-        </div>
-    </div>
+{% block card_header %}Список городов{% endblock card_header %}
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Город</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for city in citys %}
-        <tr>
-            <td><a href="{{ city.get_absolute_url }}">{{city.pk}}</a></td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% if page_obj %}
-    {% include 'helpers\pagination.html' %}
-    {% endif %}
-</div>
-{% endblock %}
+{% block card_body %}
+<h5 class="card-title">Особое обращение с заголовком</h5>
+<p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
+    контенту.</p>
+{% endblock card_body %}
 
+{% block card_footer %}
+<a href="{% url 'city:create' %}" class="btn btn-primary">Добавить город</a>
+{% endblock card_footer %}
+
+{% block body %}
+<table class="table table-sm table-striped">
+    <thead>
+    <tr>
+        <th>Город</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for city in citys %}
+    <tr>
+        <td><a href="{{ city.get_absolute_url }}">{{city.pk}}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if page_obj %}
+{% include 'helpers\pagination.html' %}
+{% endif %}
+
+{% endblock body %}
 

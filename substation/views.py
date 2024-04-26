@@ -37,7 +37,7 @@ class SubstationDeleteView(generic.DeleteView):
     template_name = 'substation/delete.html'
 
     def get_success_url(self):
-        return reverse('substation:all_url')
+        return reverse('substation:all')
 
 
 def get_substation_for_id(request, tp: int) -> HttpResponse:

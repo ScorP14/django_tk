@@ -1,20 +1,18 @@
-{% extends "main_page/basic.html" %}
+{% extends 'abstract_template\abs_card.html' %}
 {% block title %} {{ substation.view|upper }}-{{ substation.number|upper }} Удаление {% endblock %}
-{% block content %}
 
-<div class="container">
-    <div class="card  bg-light shadow-sm ">
-        <div class="card-header text-start fs-3">
-            {{ substation.city|title }}: {{ substation.view|upper }} - {{ substation.number|upper }} Удалить?
-        </div>
-        <form method="post">{% csrf_token %}
-            <div class="card-footer text-end">
-                <input type="submit" class="btn btn-success rounded-pill px-3"
-                       value="Удалить?">
-            </div>
-        </form>
-    </div>
-</div>
+{% block card_header %}
+    {{ substation.city|title }}: {{ substation.view|upper }} - {{ substation.number|upper }}
+{% endblock card_header %}
 
+{% block card_body %}
+    <p>Удалить?</p>
+{% endblock card_body %}
 
-{% endblock %}
+{% block card_footer %}
+<form method="post">{% csrf_token %}
+        <input type="submit" class="btn btn-success rounded-pill px-3"
+               value="Удалить?">
+</form>
+{% endblock card_footer %}
+

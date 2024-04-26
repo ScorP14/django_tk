@@ -21,27 +21,26 @@
 {% endblock card_footer %}
 
 {% block body %}
-<div class="container">
-    <p></p>
-    <table class="table table-striped table-dark table-hover">
-        <thead>
-        <tr>
-            <th>Количество снимков</th>
-            <th>Дефектов нет</th>
-            <th>Начальный дефект</th>
-            <th>Развившийся дефект</th>
-            <th>Аварийный дефект</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>6</td>
-            <td class="text-success">1</td>
-            <td class="text-success">2</td>
-            <td class="text-warning">3</td>
-            <td class="text-danger">4</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Количество снимков</th>
+        <th>Дефектов нет</th>
+        <th>Начальный дефект</th>
+        <th>Развившийся дефект</th>
+        <th>Аварийный дефект</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>6</td>
+        <td class="text-success">1</td>
+        <td class="text-success">2</td>
+        <td class="text-warning">3</td>
+        <td class="text-danger">4</td>
+    </tr>
+    </tbody>
+</table>
+
 {% endblock body %}

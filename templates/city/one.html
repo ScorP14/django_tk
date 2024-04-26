@@ -1,18 +1,23 @@
-{% extends "main_page/basic.html" %}
-{% block title %}{{city.title|title}}{% endblock %}
-{% block content %}
+{% extends 'abstract_template\abs_card.html' %}
+{% block title %}{{ city.title|title }}{% endblock %}
+
+{% block card_header %}
+{{ city.title|title }}
+{% endblock card_header %}
+
+{% block card_body %}
+    <span> Количество подстанций в городе: {{ count_substation }}</span>
+{% endblock card_body %}
+
+{% block card_footer %}
+    <a class="btn btn-success rounded-pill" href="{% url 'city:create' %}" role="button">Добавить новый город</a>
+    <a class="btn btn-warning rounded-pill" href="{% url 'city:update' city.slug %}" role="button">Редактировать</a>
+    <a class="btn btn-danger rounded-pill" href="{% url 'city:delete' city.slug %}" role="button">Удалить</a>
+
+{% endblock card_footer %}
 
 
-<div class="container">
-    <div class="card  bg-light shadow-sm ">
-        <div class="card-header text-start fs-3"> {{ city.title|title }}</div>
-        <div class="card-body text-start"><span> Количество подстанций в городе: {{ count_substation }}</span><br></div>
-        <div class="card-footer text-end">
-            <a class="btn btn-success rounded-pill" href="{% url 'city:create' %}" role="button">Добавить новый город</a>
-            <a class="btn btn-warning rounded-pill" href="{% url 'city:update' city.slug %}" role="button">Редактировать</a>
-            <a class="btn btn-danger rounded-pill" href="{% url 'city:delete' city.slug %}" role="button">Удалить</a>
-        </div>
-    </div>
-</div>
+{% block body %}
 
-{% endblock %}
+{% endblock body %}
+

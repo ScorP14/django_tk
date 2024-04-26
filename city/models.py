@@ -7,7 +7,7 @@ from helper.models import AddColumQuerySetForModel, BaseModel
 class City(AddColumQuerySetForModel, BaseModel):
 
     def get_absolute_url(self):
-        return reverse('city:get_one', kwargs={'slug': self.slug})
+        return reverse('city:one', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Город'
