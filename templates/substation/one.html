@@ -14,6 +14,7 @@
 {% endblock card_body %}
 
 {% block card_footer %}
+<a class="btn btn-success rounded-pill" href="{% url 'substation:all' %}" role="button">Список</a>
 <a class="btn btn-success rounded-pill" href="{% url 'substation:create' %}" role="button">Создать новую</a>
 <a class="btn btn-warning rounded-pill" href="{% url 'substation:update' substation.slug %}"
    role="button">Редактировать</a>

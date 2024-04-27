@@ -10,6 +10,7 @@
 {% endblock card_body %}
 
 {% block card_footer %}
+    <a class="btn btn-success rounded-pill" href="{% url 'city:all' %}" role="button">Список</a>
     <a class="btn btn-success rounded-pill" href="{% url 'city:create' %}" role="button">Добавить новый город</a>
     <a class="btn btn-warning rounded-pill" href="{% url 'city:update' city.slug %}" role="button">Редактировать</a>
     <a class="btn btn-danger rounded-pill" href="{% url 'city:delete' city.slug %}" role="button">Удалить</a>

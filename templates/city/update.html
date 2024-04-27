@@ -1,14 +1,6 @@
 {% extends 'abstract_template\abs_card.html' %}
 {% block title %}Изменить город{% endblock %}
-{% block card_header %}
-Изменить название города
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
-</form>
-
-
-{% endblock card_header %}
+{% block card_header %}Изменить название города{% endblock card_header %}
 
 {% block card_body %}
 <div class="row row-cols-1 row-cols-md-3 g-3">

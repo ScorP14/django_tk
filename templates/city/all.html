@@ -22,7 +22,7 @@
     <tbody>
     {% for city in citys %}
     <tr>
-        <td><a href="{{ city.get_absolute_url }}">{{city.pk}}</a></td>
+        <td><a href="{{ city.get_absolute_url }}">{{city.title|title}}</a></td>
     </tr>
     {% endfor %}
     </tbody>

@@ -8,7 +8,7 @@ class AddColumQuerySetForModel:
 
 
 class BaseModel(models.Model):
-    title = models.CharField('Название', max_length=50, primary_key=True, unique=True)
+    title = models.CharField('Название', max_length=50, unique=True)
     slug = models.SlugField('url', blank=True, null=False)
 
     def save(self, *args, **kwargs):
@@ -16,7 +16,7 @@ class BaseModel(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return f'{self.pk}'
+        return f'{self.title}'
 
     class Meta:
         abstract = True
