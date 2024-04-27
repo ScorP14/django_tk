@@ -39,6 +39,8 @@ class CityUpdateView(generic.UpdateView):
     template_name = 'city/update.html'
 
 
+
+
 class CityDeleteView(generic.DeleteView):
     model = models.City
     template_name = 'city/delete.html'
