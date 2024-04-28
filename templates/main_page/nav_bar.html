@@ -13,14 +13,11 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">Подстанции
+                       aria-expanded="false">Данные
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="{% url 'substation:all' %}">Просмотр</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{% url 'substation:create' %}">Создать</a>
+                            <a class="dropdown-item" href="{% url 'substation:all' %}">Список подстанций</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -29,16 +26,10 @@
                             <a class="dropdown-item" href="{% url 'city:all' %}">Список городов</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{% url 'city:create' %}">Добавить город</a>
-                        </li>
-                        <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Список типов ТП</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Добавить Тип</a>
+                            <a class="dropdown-item" href="{% url 'view:all' %}">Список типов ТП</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">

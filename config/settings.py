@@ -23,6 +23,7 @@ INSTALLED_APPS = [
 
     'substation.apps.SubstationConfig',
     'city.apps.CityConfig',
+    'view.apps.ViewConfig',
 
 ]
 
