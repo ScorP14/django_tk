@@ -18,11 +18,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'substation.apps.SubstationConfig',
+    'substation_type.apps.SubstationTypeConfig',
     'city.apps.CityConfig',
-    'view.apps.ViewConfig',
+    'knot.apps.KnotConfig',
+    'switchgear.apps.SwitchgearConfig',
+    'substation.apps.SubstationConfig',
     'photo.apps.PhotoConfig',
-
 ]
 
 MIDDLEWARE = [
