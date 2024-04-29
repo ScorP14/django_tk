@@ -1,19 +1,18 @@
 from django.contrib import admin
-from django.template.defaulttags import url
 from django.urls import path, include
 from django.shortcuts import render
 from django.conf.urls.static import static
 
 from django.conf import settings
-from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', lambda request: render(request, 'main_page/main_menu.html')),
     path('substation/', include('substation.urls')),
-
-
+    path('knot/', include('knot.urls')),
     path('city/', include('city.urls')),
+    path('switchgear/', include('switchgear.urls')),
+    path('substation-type/', include('substation_type.urls')),
     # url(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.ico')),
 
     # # path('photo/', include('photo.urls')),

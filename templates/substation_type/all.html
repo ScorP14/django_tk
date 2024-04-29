@@ -1,0 +1,36 @@
+{% extends 'abstract_template\abs_card.html' %}
+{% block title %}Типы подстанций{% endblock %}
+{% block card_header %}Список типов тп{% endblock card_header %}
+
+{% block card_body %}
+<h5 class="card-title">Особое обращение с заголовком</h5>
+<p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
+    контенту.</p>
+{% endblock card_body %}
+
+{% block card_footer %}
+    <a href="{% url 'substation_type:create' %}" class="btn btn-primary">Добавить тип подстанции</a>
+{% endblock card_footer %}
+
+{% block body %}
+<table class="table table-sm table-striped">
+    <thead>
+    <tr>
+        <th>Тип подстанции</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for substation_type in substation_types %}
+    <tr>
+        <td><a href="{{ substation_type.get_absolute_url }}">{{substation_type.title|upper}}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if page_obj %}
+{% include 'helpers\pagination.html' %}
+{% endif %}
+
+{% endblock body %}
+

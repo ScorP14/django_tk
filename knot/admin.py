@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from city.models import City
+from knot.models import Knot
 
 # Register your models here.
-admin.site.register(City)
+admin.site.register(Knot)

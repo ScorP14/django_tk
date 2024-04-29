@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Substation',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('view', models.CharField(max_length=250, verbose_name='Тип')),
+                ('substation_inside', models.CharField(max_length=250, verbose_name='Тип')),
                 ('number', models.CharField(max_length=50, verbose_name='Номер')),
                 ('city', models.CharField(max_length=100, verbose_name='Город')),
                 ('location', models.CharField(max_length=250, verbose_name='Расположение')),
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Подстанция',
                 'verbose_name_plural': 'Подстанции',
-                'ordering': ['city', 'view', 'number'],
+                'ordering': ['city', 'substation_inside', 'number'],
             },
         ),
         migrations.CreateModel(

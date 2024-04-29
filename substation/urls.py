@@ -4,11 +4,10 @@ from django.urls import path
 from django.shortcuts import HttpResponse, render, redirect
 
 from . import views
-from .forms import SubstationForm
-
 
 
 app_name = 'substation'
+
 urlpatterns = [
     # path('search/', test_qwe, name='search'), # lambda r: HttpResponse('search')
     path('create/', views.SubstationCreateView.as_view(), name='create'),

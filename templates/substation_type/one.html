@@ -1,0 +1,27 @@
+{% extends 'abstract_template\abs_card.html' %}
+{% block title %}{{ substation_type.title|upper }}{% endblock %}
+
+{% block card_header %}
+{{ substation_type.title|upper }}
+{% endblock card_header %}
+
+{% block card_body %}
+    <span> {{ view.title|title }} </span>
+{% endblock card_body %}
+
+{% block card_footer %}
+    <a class="btn btn-success rounded-pill" href="{% url 'substation_type:all' %}" role="button">Список</a>
+    <a class="btn btn-success rounded-pill"
+       href="{% url 'substation_type:create' %}" role="button">Добавить новый тип тп</a>
+    <a class="btn btn-warning rounded-pill"
+       href="{% url 'substation_type:update' substation_type.slug %}" role="button">Редактировать</a>
+    <a class="btn btn-danger rounded-pill"
+       href="{% url 'substation_type:delete' substation_type.slug %}" role="button">Удалить</a>
+
+{% endblock card_footer %}
+
+
+{% block body %}
+
+{% endblock body %}
+

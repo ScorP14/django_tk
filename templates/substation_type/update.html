@@ -1,0 +1,15 @@
+{% extends 'abstract_template\abs_card.html' %}
+{% block title %}Изменить тип тп{% endblock %}
+{% block card_header %}Изменить название типа подстанции{% endblock card_header %}
+
+{% block card_body %}
+<div class="row row-cols-1 row-cols-md-3 g-3">
+    <div class="col-md-8 text-end">Название</div>
+    <div class="col-md-4">{{form.title}}</div>
+</div>
+{% endblock card_body %}
+
+{% block card_footer %}
+<input type="submit" class="btn btn-success rounded-pill px-3"
+       value="Сохранить">
+{% endblock card_footer %}

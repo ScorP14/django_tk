@@ -11,7 +11,7 @@ class Substation(models.Model):
     location = models.CharField('Расположение', max_length=250)
 
     def get_substation(self, **kwargs):
-        tp = Substation.objects.filter(city=kwargs['city'], view=kwargs['view'], number=kwargs['number'])[0]
+        tp = Substation.objects.filter(city=kwargs['city'], view=kwargs['substation_inside'], number=kwargs['number'])[0]
 
 
         # return render(request, 'tk/work_temp/work_temp.html', {'work_temp': work_temp})
@@ -20,12 +20,12 @@ class Substation(models.Model):
     @staticmethod
     def filter_substation_for_city_view(**kwargs: str):
         search = Substation.objects.filter(city=kwargs['city'].lower())
-        if 'view' in kwargs:
-            search = search.filter(view=kwargs['view'].lower())
+        if 'substation_inside' in kwargs:
+            search = search.filter(view=kwargs['substation_inside'].lower())
         return search
 
     def get_absolute_url(self):
-        return reverse('tk:substation_url', kwargs={'city': self.city, 'view': self.view, 'number': self.number})
+        return reverse('tk:substation_url', kwargs={'city': self.city, 'substation_inside': self.view, 'number': self.number})
 
     def save(self, *args, **kwargs):
         self.view = slugify(self.view.lower(), allow_unicode=True)
@@ -37,7 +37,7 @@ class Substation(models.Model):
         return f'{self.city.title()}, {self.view.upper()}-{self.number}'
 
     class Meta:
-            ordering = ['city', 'view', 'number']
+            ordering = ['city', 'substation_inside', 'number']
             verbose_name = 'Подстанция'
             verbose_name_plural = 'Подстанции'
 

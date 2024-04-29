@@ -1,26 +1,25 @@
 from django.db import models
 
-# Create your models here.
-'''
+from substation.models import Substation
+
+
 class Photo(models.Model):
-    work_temp = models.ForeignKey(Substation, on_delete=models.PROTECT)
-    date = models.DateField('Дата снимка')      
-    number_photo = models.CharField('Номер снимка', max_length=10)                              
-    view_ru = models.CharField('Тип РУ', max_length=15)
-    cell = models.CharField('Узел', max_length=15) 
+    substation = models.ForeignKey(Substation, on_delete=models.CASCADE)
+    date = models.DateField('Дата снимка', auto_now_add=True)     
+    number_photo = models.CharField('Номер снимка', max_length=10)     
+    
+    substation_type = models.CharField('Тип РУ', max_length=15)
+    
+    knot = models.CharField('Узел', max_length=15)
     number_cell = models.CharField('Номер узла', max_length=15)         
-    element = models.CharField('Элемент', max_length=100, blank=True)                               
-    defect_element = models.CharField('Дефектный элемент', max_length=100, blank=True)      
-    # complete = True/False
-    t0 = models.IntegerField('Темп. OC', default=0) 
-    ta = models.IntegerField('Темп. фазы - "А"', default=0)                                         
-    tb = models.IntegerField('Темп. фазы - "Б"', default=0)                                     
-    tc = models.IntegerField('Темп. фазы - "С"', default=0)
-    result = models.CharField('Результат', max_length=250, blank=True)  
-    view_defect = models.CharField('Вид дефекта', max_length=50, blank=True)        
-    comment = models.TextField('Комментарий', blank=True)                           
 
-
+    complete = models.BooleanField(default=False)
+    t_env = models.IntegerField('Темп. OC', default=0) 
+    t_a = models.IntegerField('Темп. фазы - "А"', default=0)                                         
+    t_b = models.IntegerField('Темп. фазы - "Б"', default=0)                                     
+    t_c = models.IntegerField('Темп. фазы - "С"', default=0)
+ 
+    comment = models.TextField('Комментарий', blank=True, null=True)
 
     def __str__(self):
         return f'{self.date}: {self.number_photo}'
@@ -32,4 +31,3 @@ class Photo(models.Model):
         ordering = ['-date', 'number_photo']
         verbose_name = 'Снимок'         
         verbose_name_plural = 'Снимки'
-'''

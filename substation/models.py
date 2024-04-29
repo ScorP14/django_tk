@@ -1,25 +1,16 @@
 from django.db import models
-from django.db.models import QuerySet
 from django.urls import reverse
 
 from pytils.translit import slugify
 
-from city.models import City, View
-from helper.models import AddColumQuerySetForModel
-
-
-class GetOrNoneManager(models.Manager):
-    def get_or_none(self, **kwargs):
-        try:
-            return self.get(**kwargs)
-
-        except self.model.DoesNotExist:
-            return None
+from city.models import City
+from helper.models import AddColumQuerySetForModel, BaseModel
+from substation_type.models import SubstationType
 
 
 class Substation(AddColumQuerySetForModel, models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    view = models.ForeignKey(View, on_delete=models.CASCADE)
+    view = models.ForeignKey(SubstationType, on_delete=models.CASCADE)
     number = models.CharField('номер', max_length=50)
     slug = models.SlugField('url', blank=True, null=False)
 
@@ -40,6 +31,10 @@ class Substation(AddColumQuerySetForModel, models.Model):
         ordering = ['city', 'view', 'number']
         verbose_name = 'Подстанция'
         verbose_name_plural = 'Подстанции'
+
+
+
+
 
 
 

@@ -26,7 +26,7 @@ class SubstationViewAll(ListView):
 
 
 def substation_view(request, **kwargs):
-    substation = Substation.objects.all().filter(city=kwargs['city'], view=kwargs['view'], number=kwargs['number'])[0]
+    substation = Substation.objects.all().filter(city=kwargs['city'], view=kwargs['substation_inside'], number=kwargs['number'])[0]
     return render(request, 'tk/work_temp/work_temp.html', {'work_temp': substation})
 
 
@@ -51,7 +51,7 @@ class PhotoViewAll(ListView):
 
 def filter_photo(request, **kwargs: str):
     if 'year' in kwargs:
-        substation = Photo.objects.all().filter(city=kwargs['city'].lower(), view=kwargs['view'].lower())
+        substation = Photo.objects.all().filter(city=kwargs['city'].lower(), view=kwargs['substation_inside'].lower())
     elif 'month' in kwargs:
         substation = Photo.objects.all().filter(city=kwargs['city'].lower())
     elif 'day' in kwargs:
@@ -62,5 +62,5 @@ def filter_photo(request, **kwargs: str):
 
 
 def photo_view(request, **kwargs):
-    substation = Photo.objects.all().filter(city=kwargs['city'], view=kwargs['view'], number=kwargs['number'])[0]
+    substation = Photo.objects.all().filter(city=kwargs['city'], view=kwargs['substation_inside'], number=kwargs['number'])[0]
     return render(request, 'tk/work_temp/work_temp.html', {'work_temp': substation})
