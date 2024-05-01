@@ -27,6 +27,9 @@
         <th>Т. фазы А</th>
         <th>Т. фазы Б</th>
         <th>Т. фазы С</th>
+        <th>Т. перегрева</th>
+        <th>Т. избыточная</th>
+        <th>Результат</th>
         <th>Статут выполнения</th>
 
     </tr>
@@ -46,6 +49,14 @@
         <td>{{ photo.t_a }}</td>
         <td>{{ photo.t_b }}</td>
         <td>{{ photo.t_c }}</td>
+        <td>{{ photo.overheat }}</td>
+        <td>{{ photo.excess }}</td>
+        <td>
+            {{photo.result}}
+        </td>
+
+
+
         <td><span class="material-icons">
                 {% if photo.complete %} check_circle_outline {% else %} highlight_off {% endif%}</span>
         </td>

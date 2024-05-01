@@ -1,19 +1,24 @@
 {% extends 'abstract_template\abs_card.html' %}
-{% block title %}{{ city.title|title }}{% endblock %}
+{% block title %}{{ photo.number_photo|title }}{% endblock %}
 
 {% block card_header %}
-{{ city.title|title }}
+({{photo.date}}) {{ photo.substation.city|title }}: {{ photo.substation.view|upper }}-{{ photo.substation.number|upper }} "{{photo.number_photo}}"
 {% endblock card_header %}
 
 {% block card_body %}
-    <span> Количество подстанций в городе: {{ count_substation }}</span>
+<span>Температура окружающей среды - {{photo.t_env}}</span><br>
+
+<span>Температура фазы А - {{photo.t_a}} </span><br>
+<span>Температура фазы Б - {{photo.t_b}} </span><br>
+<span>Температура фазы С - {{photo.t_c}} </span><br>
+
 {% endblock card_body %}
 
 {% block card_footer %}
-    <a class="btn btn-success rounded-pill" href="{% url 'photo:all' %}" role="button">Список</a>
-    <a class="btn btn-success rounded-pill" href="{% url 'photo:create' %}" role="button">Добавить новый город</a>
-    <a class="btn btn-warning rounded-pill" href="{% url 'photo:update' photo.pk %}" role="button">Редактировать</a>
-    <a class="btn btn-danger rounded-pill" href="{% url 'photo:delete' photo.pk %}" role="button">Удалить</a>
+<a class="btn btn-success rounded-pill" href="{% url 'photo:all' %}" role="button">Список</a>
+<a class="btn btn-success rounded-pill" href="{% url 'photo:create' %}" role="button">Добавить новый город</a>
+<a class="btn btn-warning rounded-pill" href="{% url 'photo:update' photo.pk %}" role="button">Редактировать</a>
+<a class="btn btn-danger rounded-pill" href="{% url 'photo:delete' photo.pk %}" role="button">Удалить</a>
 
 {% endblock card_footer %}
 

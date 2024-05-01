@@ -85,7 +85,3 @@ class CalkPrint:
         return self.excess_str() if self.calk.get_excess() >= self.calk.get_overheat() else self.overheating_str()
 
 
-calk = CalkTemp(10, 20, 20, 30)
-pr_cal = CalkPrint(calk)
-
-print(pr_cal.get_type_defect())

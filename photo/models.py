@@ -2,12 +2,13 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+from helper.models import AddColumQuerySetForModel
 from knot.models import Knot
 from substation.models import Substation
 from switchgear.models import Switchgear
 
 
-class Photo(models.Model):
+class Photo(AddColumQuerySetForModel, models.Model):
     substation = models.ForeignKey(Substation, on_delete=models.CASCADE, verbose_name='Подстанция')
     date = models.DateField('Дата снимка', default=timezone.now)
     number_photo = models.CharField('Номер снимка', max_length=10)
