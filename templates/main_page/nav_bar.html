@@ -41,7 +41,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                                                <li>
+                        <li>
                             <a class="dropdown-item" href="{% url 'knot:all' %}">Узлы присоединения</a>
                         </li>
                     </ul>
@@ -52,10 +52,8 @@
                        aria-expanded="false">Фотографии
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Просмотр</a></li>
-                        <li><a class="dropdown-item" href="#">Создать</a></li>
-                        <li><a class="dropdown-item" href="#">Обновить</a></li>
-                        <li><a class="dropdown-item" href="#">Удалить</a></li>
+                        <li><a class="dropdown-item" href="{% url 'photo:all' %}">Просмотр</a></li>
+                        <li><a class="dropdown-item" href="{% url 'photo:create' %}">Создать</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

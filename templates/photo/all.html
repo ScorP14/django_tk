@@ -1,0 +1,61 @@
+{% extends 'abstract_template\abs_card.html' %}
+{% block title %}Фотографии{% endblock %}
+{% block card_header %}Список фотогрифий{% endblock card_header %}
+
+{% block card_body %}
+<h5 class="card-title">Особое обращение с заголовком</h5>
+<p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному
+    контенту.</p>
+{% endblock card_body %}
+
+{% block card_footer %}
+<a href="{% url 'photo:create' %}" class="btn btn-primary">Добавить фото</a>
+{% endblock card_footer %}
+
+{% block body %}
+<table class="table table-sm table-striped">
+    <thead>
+    <tr>
+        <th>Номер фото</th>
+        <th>Город</th>
+        <th>ТП</th>
+        <th>Дата</th>
+        <th>РУ</th>
+        <th>Узел</th>
+        <th>Номер узла</th>
+        <th>Т. ос</th>
+        <th>Т. фазы А</th>
+        <th>Т. фазы Б</th>
+        <th>Т. фазы С</th>
+        <th>Статут выполнения</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for photo in photos %}
+    <tr>
+        <td><a href="{{ photo.get_absolute_url }}">{{ photo.number_photo }}</a></td>
+        <td><a href="{{ photo.substation.city.get_absolute_url }}">{{ photo.substation.city | title }}</a></td>
+        <td><a href="{{ photo.substation.get_absolute_url }}">
+            {{ photo.substation.view | upper }}-{{ photo.substation.number }}</a></td>
+        <td>{{ photo.date }}</td>
+        <td>{{ photo.switchgear }}</td>
+        <td>{{ photo.knot }}</td>
+        <td>{{ photo.number_cell }}</td>
+        <td>{{ photo.t_env }}</td>
+        <td>{{ photo.t_a }}</td>
+        <td>{{ photo.t_b }}</td>
+        <td>{{ photo.t_c }}</td>
+        <td><span class="material-icons">
+                {% if photo.complete %} check_circle_outline {% else %} highlight_off {% endif%}</span>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if page_obj %}
+    {% include 'helpers\pagination.html' %}
+{% endif %}
+
+{% endblock body %}
+

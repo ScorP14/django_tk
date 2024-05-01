@@ -11,6 +11,7 @@ urlpatterns = [
     path('substation/', include('substation.urls')),
     path('knot/', include('knot.urls')),
     path('city/', include('city.urls')),
+    path('photo/', include('photo.urls')),
     path('switchgear/', include('switchgear.urls')),
     path('substation-type/', include('substation_type.urls')),
     # url(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.ico')),

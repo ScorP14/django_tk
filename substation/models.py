@@ -32,7 +32,7 @@ class Substation(AddColumQuerySetForModel, models.Model):
         verbose_name = 'Подстанция'
         verbose_name_plural = 'Подстанции'
 
-
+        # UniqueConstraint
 
 
 
